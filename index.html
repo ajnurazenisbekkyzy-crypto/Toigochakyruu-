@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f4e9d8">
+<title>Айбийке & Бекбол — Тойго чакыруу</title>
+
+<style>
+:root {
+  --cream: #f8f1e7;
+  --gold: #b49461;
+  --dark-gold: #86673c;
+  --text: #6e5942;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, #fffaf2, transparent 65%),
+    linear-gradient(145deg, #f4e8d7, #e7d5bd);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.screen {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 18px;
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--dark-gold);
+  font-size: 11px;
+  letter-spacing: 4px;
+  line-height: 1.8;
+}
+
+.cover-title {
+  margin: 14px 0 25px;
+  color: var(--dark-gold);
+  font-size: 27px;
+  font-weight: normal;
+}
+
+.envelope-button {
+  position: relative;
+  width: min(86vw, 370px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 5px;
+  box-shadow: 0 16px 45px #80613b35;
+  transition: transform .35s, opacity .5s;
+  overflow: hidden;
+}
+
+.envelope-button:active {
+  transform: scale(.97);
+}
+
+.envelope-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.open-label {
+  margin-top: 23px;
+  color: var(--dark-gold);
+  font-size: 11px;
+  letter-spacing: 2px;
+  animation: pulse 2s infinite;
+}
+
+#invite {
+  display: none;
+  padding: 28px 15px 45px;
+  animation: reveal 1.1s ease both;
+}
+
+.card {
+  position: relative;
+  width: min(100%, 540px);
+  margin: auto;
+  padding: 36px 23px;
+  background: rgba(255, 251, 244, .96);
+  border: 1px solid #c9ac7c;
+  outline: 4px double #d8c19a;
+  outline-offset: -10px;
+  box-shadow: 0 15px 50px #846a4930;
+  text-align: center;
+}
+
+.card::before,
+.card::after {
+  content: "✧";
+  display: block;
+  color: var(--gold);
+  font-size: 27px;
+  margin: 0 auto 16px;
+}
+
+.card::after {
+  margin: 18px auto 0;
+}
+
+.ornament {
+  color: var(--gold);
+  font-size: 20px;
+  letter-spacing: 9px;
+  margin: 12px 0;
+}
+
+h1 {
+  margin: 24px 0;
+  color: #997648;
+  font-size: clamp(38px, 10vw, 57px);
+  font-weight: normal;
+  line-height: 1.18;
+}
+
+.ampersand {
+  font-size: .68em;
+  font-style: italic;
+}
+
+.intro {
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.9;
+}
+
+.divider {
+  width: 95px;
+  margin: 25px auto;
+  border: 0;
+  border-top: 1px solid #cbb184;
+}
+
+.rings-photo {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+  object-fit: cover;
+  margin: 25px auto;
+  border: 5px solid #fff;
+  box-shadow: 0 5px 20px #82684622;
+}
+
+.date {
+  color: #997648;
+  font-size: 27px;
+  line-height: 1.6;
+  letter-spacing: 2px;
+}
+
+.time {
+  font-size: 19px;
+  margin-top: 7px;
+}
+
+.details {
+  margin: 24px 0;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.details strong {
+  color: #8d6d42;
+  font-weight: normal;
+}
+
+.hosts-label {
+  margin-top: 28px;
+  font-style: italic;
+}
+
+.hosts {
+  color: #997648;
+  font-size: clamp(24px, 7vw, 34px);
+  font-weight: normal;
+  margin: 12px 0 20px;
+}
+
+.closing {
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.9;
+}
+
+.music-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 23px auto 0;
+  padding: 12px 21px;
+  border: 1px solid #b49461;
+  border-radius: 30px;
+  background: #f4e7d1;
+  color: #765a36;
+  font-size: 14px;
+}
+
+.music-button:active {
+  background: #e8d5b6;
+}
+
+.music-note {
+  display: inline-block;
+}
+
+.music-button.playing .music-note {
+  animation: spin 4s linear infinite;
+}
+
+.footer {
+  margin-top: 25px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #a38a64;
+}
+
+#status {
+  min-height: 18px;
+  font-size: 12px;
+  color: #94774f;
+  margin-top: 8px;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: .65; }
+  50% { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 380px) {
+  .card {
+    padding: 30px 18px;
+  }
+  .eyebrow {
+    letter-spacing: 2px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- БИРИНЧИ ЭКРАН: КОНВЕРТ -->
+<section class="screen" id="cover">
+  <div class="eyebrow">СИЗДЕРГЕ ӨЗГӨЧӨ ЧАКЫРУУ</div>
+
+  <h2 class="cover-title">Сүйүү менен чакырабыз</h2>
+
+  <button
+    class="envelope-button"
+    id="openButton"
+    type="button"
+    aria-label="Тойго чакырууну ачуу"
+  >
+    <img
+      src="envelope.jpg"
+      alt="Айбийке менен Бекболдун тойго чакыруу конверти"
+    >
+  </button>
+
+  <div class="open-label">
+    ♡ ЧАКЫРУУНУ АЧУУ ҮЧҮН БАСЫҢЫЗ ♡
+  </div>
+</section>
+
+<!-- ЭКИНЧИ ЭКРАН: ЧАКЫРУУ -->
+<main class="screen" id="invite">
+  <article class="card">
+
+    <div class="eyebrow">ТОЙГО ЧАКЫРУУ</div>
+    <div class="ornament">✧ ❀ ✧</div>
+
+    <h1>
+      Айбийке<br>
+      <span class="ampersand">&</span><br>
+      Бекбол
+    </h1>
+
+    <hr class="divider">
+
+    <p class="intro">
+      Эки жүрөк, бир тилек, бир тагдыр…<br>
+      Сиздерди биздин кубанычтуу күнүбүзгө
+      чын жүрөктөн чакырабыз!
+    </p>
+
+    <!-- ЖУБАЙЛАРДЫН ШАКЕК МЕНЕН СҮРӨТҮ -->
+    <img
+      class="rings-photo"
+      src="rings.jpg"
+      alt="Үйлөнүү шакектери"
+      loading="eager"
+    >
+
+    <div class="ornament">❦</div>
+
+    <p class="eyebrow">ТОЙ КҮНҮ</p>
+    <div class="date">25-ОКТЯБРЬ</div>
+    <div class="time">Саат 17:00</div>
+
+    <hr class="divider">
+
+    <div class="details">
+      <p>Өтүүчү жер:</p>
+      <strong>Гүлчө шаары</strong>
+      <p><strong>Ресторан «Ак Бата Гранд»</strong></p>
+    </div>
+
+    <div class="ornament">✧ ❀ ✧</div>
+
+    <p class="hosts-label">Той ээлери</p>
+    <h2 class="hosts">Нурмамат & Айжамал</h2>
+
+    <p class="closing">
+      Тойго келип, кадырлуу конок болуп кетиңиздер!
+    </p>
+
+    <!-- ФОНОВАЯ МУЗЫКА -->
+    <audio id="weddingMusic" src="music.mp3" loop preload="none">
+      Браузериңиз аудио ойнотууну колдобойт.
+    </audio>
+
+    <button
+      class="music-button"
+      id="musicButton"
+      type="button"
+    >
+      <span class="music-note">♫</span>
+      <span id="musicLabel">Музыканы ойнотуу</span>
+    </button>
+
+    <div id="status" aria-live="polite"></div>
+
+    <div class="footer">
+      СИЗДЕРДИ КҮТӨБҮЗ ♥
+    </div>
+
+  </article>
+</main>
+
+<script>
+const cover = document.getElementById("cover");
+const invite = document.getElementById("invite");
+const openButton = document.getElementById("openButton");
+const music = document.getElementById("weddingMusic");
+const musicButton = document.getElementById("musicButton");
+const musicLabel = document.getElementById("musicLabel");
+const statusText = document.getElementById("status");
+
+let opened = false;
+
+openButton.addEventListener("click", async function () {
+  if (opened) return;
+  opened = true;
+
+  // Конвертти жашырып, чакырууну көрсөтөбүз
+  cover.style.display = "none";
+  invite.style.display = "flex";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Конверт басылганда музыканы иштетүүгө аракет кылабыз
+  try {
+    await music.play();
+    updateMusicButton(true);
+    statusText.textContent = "";
+  } catch (error) {
+    updateMusicButton(false);
+    statusText.textContent =
+      "Музыканы угуу үчүн төмөнкү баскычты басыңыз.";
+  }
+});
+
+function updateMusicButton(isPlaying) {
+  musicLabel.textContent = isPlaying
+    ? "Музыканы токтотуу"
+    : "Музыканы ойнотуу";
+
+  musicButton.classList.toggle("playing", isPlaying);
+}
+
+musicButton.addEventListener("click", async function () {
+  if (music.paused) {
+    try {
+      await music.play();
+      updateMusicButton(true);
+      statusText.textContent = "";
+    } catch (error) {
+      updateMusicButton(false);
+      statusText.textContent =
+        "Музыка файлын текшериңиз.";
+    }
+  } else {
+    music.pause();
+    updateMusicButton(false);
+  }
+});
+
+// Музыка файлы табылбаса, колдонуучуга билдиребиз
+music.addEventListener("error", function () {
+  statusText.textContent =
+    "Музыка табылган жок. music.mp3 файлын текшериңиз.";
+});
+</script>
+
+</body>
+  </html>
+  
